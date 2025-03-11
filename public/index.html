@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Use Case Catalogue</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Agbalumo&family=Denk+One&family=Fugaz+One&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Sriracha&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    .agbalumo-regular {
+      font-family: "Agbalumo", serif;
+      font-weight: 400;
+      font-style: normal;
+    }
+        .dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            
+            z-index: 10;
+        }
+        .show {
+            display: block;
+        }
+  </style>
+</head>
+<body class="bg-gray-100">
+  <header
+    class="bg-white text-white p-5 flex flex-col md:flex-row justify-between items-center shadow-[0_4px_6px_rgba(0,0,0,0.1)]"
+  >
+    <div class="flex items-center gap-20">
+      <a href="https://www.quinnox.com/" target="_blank">
+        <img
+          src="https://www.quinnox.com/wp-content/uploads/2022/08/Quinnox-Logo.svg"
+          alt="Logo"
+          class="h-20 w-30"
+        />
+      </a>
+      <h1 class="text-3xl font-medium text-gray-800 ml-4 agbalumo-regular">
+        AI Use Case Catalogue
+      </h1>
+    </div>
+
+    <div class="flex flex-col sm:flex-row gap-3 mt-3 md:mt-0">
+      <label for="industryFilter" class="block text-gray-700 font-medium p-2"
+        >Industry</label
+      >
+      <select
+        id="industryFilter"
+        class="p-2 bg-white text-gray-800 border border-gray-400 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-500"
+      >
+        <option value="" disabled selected hidden>Select</option>
+        <option value="">Select all</option>
+      </select>
+      <label for="technologyFilter" class="block text-gray-700 font-medium p-2"
+        >Technology</label
+      >
+      <select
+        id="technologyFilter"
+        class="p-2 bg-white text-gray-800 border border-gray-400 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-500"
+      >
+        <option value="" disabled selected hidden>Select</option>
+        <option value="">Select all</option>
+      </select>
+    </div>
+
+    <div class="relative" id="profileContainer">
+      <div class="flex items-center space-x-3 cursor-pointer" id="profileToggle">
+          <span class="text-gray-700 font-medium" id="userName">Loading...</span>
+          <div class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white" id="userInitial">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+          </div>
+      </div>
+      
+      <!-- Dropdown Menu -->
+      <div class="dropdown bg-white shadow-lg rounded-lg mt-2 w-48 py-2 border border-gray-200" id="profileDropdown">
+          <div class="px-4 py-2 border-b border-gray-200">
+              <p class="text-gray-500 text-sm">Signed in as</p>
+              <p class="text-gray-800 font-medium text-sm truncate" id="userEmail">Loading...</p>
+          </div>
+          <div class="px-4 py-2">
+              <button id="logoutButton" class="w-full text-left text-red-600 hover:text-red-800 text-sm font-medium flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                  </svg>
+                  Sign Out
+              </button>
+          </div>
+      </div>
+  </div>
+  </header>
+
+  <div class="container mx-auto mt-5">
+    <div
+      class="relative text-center bg-cover bg-center bg-no-repeat h-64 rounded-lg"
+      style="background-image: url('background.png')"
+    >
+      <div class="absolute inset-0 bg-black bg-opacity-55 flex items-center justify-center">
+        <p
+          class="text-white text-lg font-medium max-w-2xl"
+        >
+          This Catalogue presents AI-driven solutions across industries, highlighting key use cases and their applications. Users can filter by industry or technology to explore relevant use cases.
+        </p>
+      </div>
+    </div>
+
+    <!-- Sub-filter Section -->
+    <div id="departmentFilterContainer" class="hidden mt-4">
+      <select
+        id="departmentFilter"
+        class="p-2 bg-white text-gray-800 border border-gray-400 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-500"
+      >
+        <option value="" disabled selected hidden>Domain</option>
+      </select>
+    </div>
+
+    <div
+      id="cardContainer"
+      class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-6"
+    >
+      <!-- Cards will be dynamically inserted here -->
+    </div>
+
+    <div class="text-center mt-6">
+      <button
+        id="viewMoreButton"
+        class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+        onclick="loadMoreUseCases();"
+      >
+        View More
+      </button>
+    </div>
+    <!-- Footer -->
+  </div>
+
+  <footer class="bg-gray-800 mt-10 text-white py-4">
+    <div class="container mx-auto px-6 flex justify-between items-center">
+      <!-- Left section: Copyright -->
+      <div>
+        <p>&copy; 2025 QUINNOX. All rights reserved.</p>
+      </div>
+
+      <!-- Right section: Contact Us link -->
+      <div class="text-right">
+        <a
+          href="https://www.quinnox.com/contact-us/"
+          target="_blank"
+          class="text-blue-400 hover:text-blue-600 transition duration-300"
+          >Contact Us</a
+        >
+      </div>
+    </div>
+  </footer>
+
+ <!-- Update the script section at the bottom of index.html -->
+<script src="data-store.js"></script>
+<script>
+  let data = []; // Store the fetched data globally
+  let visibleCount = 9; // Number of use cases to display initially
+
+  async function fetchData() {
+    try {
+      const response = await fetch("cataloguedata.json");
+      data = await response.json();
+
+      // Load any previously stored data
+      loadDataFromStorage();
+
+      // Populate filters
+      const industrySet = new Set(
+        data.map((item) => item["Industry Vertical"]).filter(Boolean)
+      );
+      const technologySet = new Set(
+        data.map((item) => item["Technology"]).filter(Boolean)
+      );
+
+      const industryFilter = document.getElementById("industryFilter");
+      const technologyFilter = document.getElementById("technologyFilter");
+      const departmentFilterContainer = document.getElementById(
+        "departmentFilterContainer"
+      );
+      const departmentFilter = document.getElementById("departmentFilter");
+
+      industrySet.forEach((industry) => {
+        if (industry !== "Industries") {
+          const option = document.createElement("option");
+          option.value = industry;
+          option.textContent = industry;
+          industryFilter.appendChild(option);
+        }
+      });
+
+      technologySet.forEach((technology) => {
+        if (technology !== "Technologies") {
+          const option = document.createElement("option");
+          option.value = technology;
+          option.textContent = technology;
+          technologyFilter.appendChild(option);
+        }
+      });
+
+      // Event listener for industry filter to populate department sub-filter
+      industryFilter.addEventListener("change", () => {
+        const selectedIndustry = industryFilter.value;
+        departmentFilter.innerHTML =
+          '<option value="" disabled selected hidden>Domain</option>'; // Clear previous options
+
+        if (selectedIndustry && selectedIndustry !== "all") {
+          departmentFilterContainer.classList.remove("hidden");
+
+          const departmentSet = new Set(
+            data
+              .filter(
+                (item) => item["Industry Vertical"] === selectedIndustry
+              )
+              .map((item) => item["Horizontal"])
+          );
+
+          departmentSet.forEach((department) => {
+            const option = document.createElement("option");
+            option.value = department;
+            option.textContent = department;
+            departmentFilter.appendChild(option);
+          });
+        } else {
+          departmentFilterContainer.classList.add("hidden");
+        }
+      });
+
+      // Display initial set of cards
+      displayCards(data.slice(0, visibleCount));
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  }
+
+  function displayCards(filteredData) {
+    const cardContainer = document.getElementById("cardContainer");
+    cardContainer.innerHTML = ""; // Clear previous cards
+
+    filteredData.forEach((useCase) => {
+      // Store the use case data and get an ID
+      const useCaseId = storeUseCaseData(useCase);
+      saveDataToStorage(); // Save to localStorage
+      
+      // Build a simple URL with just the ID
+      const linkURL = new URL("usecase-details.html", window.location.origin);
+      linkURL.searchParams.set("id", useCaseId);
+      
+      // Create the card
+      const card = document.createElement("div");
+      card.className =
+        "bg-white border border-gray-400 rounded-lg shadow-lg p-5 transition-transform transform hover:scale-105";
+      card.innerHTML = `
+        <h3 class="text-lg font-bold text-gray-800">${
+          useCase["Use Case"] || "No Title"
+        }</h3>
+        <p class="text-sm text-gray-600 mt-2">${
+          useCase["Description"] || "No description"
+        }</p>
+        <a href="${linkURL.toString()}"
+            class="text-indigo-500 font-medium mt-4 inline-block">Explore &gt;&gt;</a>
+      `;
+      cardContainer.appendChild(card);
+    });
+  }
+
+  function loadMoreUseCases() {
+    visibleCount += 9;
+    const filteredData = data.slice(0, visibleCount);
+    displayCards(filteredData);
+
+    // Hide "View More" button if all use cases are visible
+    if (visibleCount >= data.length) {
+      document.getElementById("viewMoreButton").style.display = "none";
+    }
+  }
+
+  function applyFilters() {
+    const industryValue = document.getElementById("industryFilter").value;
+    const technologyValue = document.getElementById("technologyFilter").value;
+    const departmentValue = document.getElementById("departmentFilter").value;
+
+    const filteredData = data.filter((useCase) => {
+      return (
+        (!industryValue ||
+          industryValue === "all" ||
+          useCase["Industry Vertical"] === industryValue) &&
+        (!technologyValue ||
+          technologyValue === "all" ||
+          useCase["Technology"] === technologyValue) &&
+        (!departmentValue || useCase["Horizontal"] === departmentValue)
+      );
+    });
+
+    visibleCount = 20; // Reset visible count on filter
+    displayCards(filteredData.slice(0, visibleCount));
+
+    // Show "View More" button if there are more results to load
+    const viewMoreButton = document.getElementById("viewMoreButton");
+    if (filteredData.length > visibleCount) {
+      viewMoreButton.style.display = "inline-block";
+    } else {
+      viewMoreButton.style.display = "none";
+    }
+  }
+
+  document
+    .getElementById("industryFilter")
+    .addEventListener("change", applyFilters);
+  document
+    .getElementById("technologyFilter")
+    .addEventListener("change", applyFilters);
+  document
+    .getElementById("departmentFilter")
+    .addEventListener("change", applyFilters);
+
+  fetchData();
+
+        // Elements
+        const profileToggle = document.getElementById('profileToggle');
+        const profileDropdown = document.getElementById('profileDropdown');
+        const logoutButton = document.getElementById('logoutButton');
+        const userName = document.getElementById('userName');
+        const userEmail = document.getElementById('userEmail');
+        const userInfoContent = document.getElementById('userInfoContent');
+        const userInitial = document.getElementById('userInitial');
+        
+        // Toggle dropdown
+        profileToggle.addEventListener('click', function() {
+            profileDropdown.classList.toggle('show');
+        });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!profileContainer.contains(event.target)) {
+                profileDropdown.classList.remove('show');
+            }
+        });
+        
+        // Logout button
+        logoutButton.addEventListener('click', function() {
+            window.location.href = '/logout';
+        });
+        
+        // Fetch user info
+        fetch('/userinfo')
+            .then(response => response.json())
+            .then(data => {
+                if (data.isAuthenticated) {
+                    // Display user info
+                    userName.textContent = data.user.name;
+                    userEmail.textContent = data.user.username;
+                    userInfoContent.textContent = JSON.stringify(data.user, null, 2);
+                    
+                    // Replace user icon with first letter of user's name
+                    if (data.user.name && data.user.name.length > 0) {
+                        const firstLetter = data.user.name.charAt(0).toUpperCase();
+                        userInitial.innerHTML = `<span class="text-xl font-bold">${firstLetter}</span>`;
+                    }
+                } else {
+                    // Redirect to login if not authenticated
+                    window.location.href = '/login';
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching user info:', error);
+                userInfoContent.textContent = 'Error loading user information';
+            });
+
+</script>
+</body>
+</html>

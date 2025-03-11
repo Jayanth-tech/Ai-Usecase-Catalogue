@@ -1,0 +1,49 @@
+{
+  "routes": [
+    {
+      "route": "/",
+      "serve": "/index.html"
+    },
+    {
+      "route": "/usecase-details",
+      "serve": "/usecase-details.html"
+    },
+    {
+      "route": "/page3",
+      "serve": "/page3.html"
+    },
+    {
+      "route": "/data-store.js",
+      "headers": {
+        "content-type": "application/javascript"
+      }
+    },
+    {
+      "route": "/*.js",
+      "headers": {
+        "content-type": "application/javascript"
+      }
+    },
+    {
+      "route": "/*.json",
+      "headers": {
+        "content-type": "application/json"
+      }
+    },
+    {
+      "route": "/cataloguedata.json",
+      "headers": {
+        "content-type": "application/json",
+        "Cache-Control": "no-cache"
+      }
+    }
+  ],
+  "mimeTypes": {
+    ".js": "application/javascript",
+    ".json": "application/json"
+  },
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": ["*.js", "*.json", "*.css", "*.png", "*.jpg", "*.gif"]
+  }
+}

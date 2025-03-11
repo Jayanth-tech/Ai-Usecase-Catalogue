@@ -1,0 +1,21 @@
+{
+  "name": "ai-usecase-catalogue",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "keywords": ["msal", "authentication", "azure", "node"],
+    "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-session": "^1.18.1",
+    "msal-node": "^0.0.1-security",
+    "nodemon": "^3.1.9",
+    "@azure/msal-node": "^1.14.6"
+  }
+}
