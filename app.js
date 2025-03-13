@@ -12,6 +12,12 @@ const PORT = process.env.PORT || 8080;
 console.log(PORT);
 
 
+if (process.env.NODE_ENV === 'production') {
+    console.log('App is running in production mode');
+    // Your production-specific code here
+}
+
+
 // Configure session middleware
 app.use(session({
     secret: process.env.SESSION_SECRET || 'fallback-session-secret',
