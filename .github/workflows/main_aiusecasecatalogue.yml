@@ -16,7 +16,7 @@ jobs:
       PORT: 8080
       CLIENT_ID: ee897572-f3f8-4a0b-88fe-bd0945b6b34e
       TENANT_ID: 21212548-dd86-4f27-a1fa-faf16eedb7c3
-
+      CLIENT_SECRET : ${{ secrets.CLIENT_SECRET }}
       REDIRECT_URI: https://aiusecasecatalogue-eeb9akgchjc8a5gk.centralus-01.azurewebsites.net/redirect
 
     steps:
